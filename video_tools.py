@@ -33,7 +33,7 @@ def draw_translation(output_string, location, image):
     # use a truetype font  
     font = ImageFont.truetype("Arial Black.ttf", 20)  
 
-    text_size = font.get_size(output_string)
+    text_size = font.getsize(output_string)
     rect_size = (text_size[0]+20, text_size[1]+20)
     rect = Image.new('RGBA', rect_size, "black")
     rect_draw = ImageDraw.Draw(rect)
