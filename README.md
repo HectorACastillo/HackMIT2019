@@ -1,14 +1,18 @@
-### And coding style tests
+# AR Translator
 
-Explain what these tests test and why
+Learning new language vocabulary through an interactive AR labeling experience.
 
 ```
 Give an example
 ```
 
-## Deployment
+## Contributors
 
-Add additional notes about how to deploy this on a live system
+* **Hector Castillo** - *Project Manager* - [GitHub](https://github.com/)
+* **Evan Hostetler** - *Hardware Specialist* - [GitHub](https://github.com/)
+* **Anothony Nardomarino** - *Object Detection Specialist* - [GitHub](https://github.com/)
+* **Tony Terrasa** - *AR Specialist* - [GitHub](https://github.com/)
+* **Grady Thomas** - *Pledge* - [GitHub](https://github.com/)
 
 ## Built With
 
