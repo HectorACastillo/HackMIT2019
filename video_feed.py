@@ -44,7 +44,7 @@ def make_tracker(): return cv2.TrackerKCF_create()
 # on TonyT computer:
 # comp camera: index 0
 # logitech: index 2
-cap = cv2.VideoCapture(2) # input the indeex of the video you want
+cap = cv2.VideoCapture(0) # input the indeex of the video you want
 tracker = make_tracker() # for tracking the object in the frame
 
 # location of the object 
