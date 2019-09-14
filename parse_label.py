@@ -25,7 +25,7 @@ def reference(dic, key):
     OUTPUT: the value associated with key
     '''
     i = dic.find('"'+key+'":')+len(key)+3
-    return dic[i:dic.find(',',i)]
+    return dic[i:dic.find(',',i)].replace('"','')
 
 def get_depth(dic):
     '''
