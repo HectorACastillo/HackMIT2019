@@ -22,3 +22,13 @@ Learning new language vocabulary through an interactive AR labeling experience.
 
 * HackMIT
 * IBM
+
+
+In order to run the google translate, you need the private key
+then set the following environment variable;
+echo $GOOGLE_APPLICATION_CREDENTIALS
+/home/tony/Projects/AR Translation-elecd951bf41.json
+
+
+pip install --upgrade google-cloud-trnsnlate
+

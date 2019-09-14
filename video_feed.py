@@ -21,6 +21,8 @@ import time
 
 from recog import recog
 from video_tools import draw_tracking_box
+from parse_label import parse_label
+from change_lang import change_lang
 
 """
 types of trackers
@@ -63,7 +65,7 @@ while(True):
     # receive use input
     key = cv2.waitKey(1)
 
-    print(key)
+    #print(key)
     
     if key == ord("w"):
         """
@@ -74,12 +76,13 @@ while(True):
         if not current_box:
             print("stop")
 
-        x,y,w,h = [int(p) for p in current_box]
-        cv2.imwrite('frame.jpg', frame[y:y+h,x:x+w])
-        # recognition_output = recog()
-        # to_translate = recog_parse(recognition_output)
-        # input_dict = to_dict(input)
-        # output = translate(input_dict)
+        x,y,w,h = [int(p) for p in current_box] # convert the coordinates to integers
+        cv2.imwrite('frame.jpg', frame[y:y+h,x:x+w]) # save image of just the 
+        recognition_output = recog() # run the image recognition
+        to_translate = parse_label(recognition_output) # 
+        translated = change_lang(to_translate[1:], "es")
+        print(to_translate, translated)
+
 
     # if the 's' key is selected, we are going to "select" a bounding
     # box to track

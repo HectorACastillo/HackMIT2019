@@ -1,7 +1,7 @@
 #to run need to configure and install GCP Cloud SDK tools:
 #https://cloud.google.com/translate/docs/quickstart
 #pip install --upgrade google-cloud-translate
-
+from __future__ import print_function
 from google.cloud import translate
 
 def change_lang(phrase, language):
@@ -10,3 +10,5 @@ def change_lang(phrase, language):
 	new_word = client.translate(phrase, source_language = 'en')
 
 	return new_word["translatedText"]
+
+
