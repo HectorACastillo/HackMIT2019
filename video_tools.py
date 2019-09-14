@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 
 from recog import recog
-from video_tools import draw_tracking_box, draw_translation
 from parse_label import parse_label
 from change_lang import change_lang
 

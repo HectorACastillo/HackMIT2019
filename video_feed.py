@@ -57,7 +57,7 @@ key = None # user input
 
 
 # press 'q' to quit the operation
-while(key & 0xFF != ord('q')):
+while(key and key & 0xFF != ord('q')):
     # Capture frame-by-frame
     ret, frame = cap.read()
 
@@ -71,12 +71,15 @@ while(key & 0xFF != ord('q')):
         # if found, draw a box around it
         if success: draw_tracking_box(current_box, frame)
 
+        
+
 
     # receive user input
     key = cv2.waitKey(1)
 
 
-    if key == ord("t"):
+    # must be tracking an object
+    if current_box and key == ord("t"):
         # Upon pressing 't', it will call the function to trasnlate and display the output
         to_translate, translated = translate(current_box, frame, "es")
 
@@ -84,8 +87,8 @@ while(key & 0xFF != ord('q')):
     # if the 's' key is selected, we are going to "select" a bounding
     # box to track
     if key == ord("s"):
-        # select the bounding box of the object we want to track (make
-        # sure you press ENTER or SPACE after selecting the ROI)
+        # select the bounding box of the object we want to track 
+        # (make sure you press ENTER or SPACE after selecting the ROI)
         initBB = cv2.selectROI("Frame", frame, fromCenter=False, showCrosshair=True)
         tracker.init(frame, initBB)
 
@@ -93,7 +96,11 @@ while(key & 0xFF != ord('q')):
         current_box = initBB
 
 
-    if translated: frame = draw_translation(translated, (x,y), frame)
+    # if a translation has been made, draw it on the box 
+    if translated: 
+        location = (int(current_box[0]), int(current_box[1]))
+        frame = draw_translation(translated, location , frame)
+
     cv2.imshow('frame', frame)
 
 
