@@ -16,6 +16,7 @@
 
 from __future__ import print_function
 import numpy as np
+from recog import recog
 import cv2
 import time
 
@@ -37,7 +38,7 @@ OPENCV_OBJECT_TRACKERS = {
 # comp camera: index 0
 # logitech: index 2
 cap = cv2.VideoCapture(2) # input the indeex of the video you want
-tracker = cv2.TrackerMIL_create()
+#tracker = cv2.TrackerMIL_create()
 tracking = False
 
 while(True):
@@ -71,11 +72,12 @@ while(True):
     #     tracker.init(frame, initBB)
     #     tracking = True
 
-    time.sleep()
+    # time.sleep()
 
     if key == ord('w'):
         cv2.imwrite('frame.png', frame)
-        # input = classifier.classify("frame.png")
+        input = recog()
+        print(input)
         # input_dict = to_dict(input)
         # output = translate(input_dict)
 

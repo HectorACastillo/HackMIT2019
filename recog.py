@@ -3,9 +3,12 @@
 # Python v2.7
 # dependencies:
 #   conda install future
+# pip install ibm_watson
 # 9 14 2019
 
 from __future__ import print_function
+from ibm_watson import VisualRecognitionV3
+import json
 
 def recog():
 
@@ -15,8 +18,6 @@ def recog():
         classifications and their associated probabilities
     """
 
-    from ibm_watson import VisualRecognitionV3
-    import json
 
     visual_recognition = VisualRecognitionV3(
         version='2018-03-19',
