@@ -31,10 +31,17 @@ def draw_translation(output_string, location, image):
 
     draw = ImageDraw.Draw(image_pillow)  
     # use a truetype font  
-    font = ImageFont.truetype("Arial Black.ttf", 40)  
+    font = ImageFont.truetype("Arial Black.ttf", 20)  
+
+    text_size = font.get_size(output_string)
+    rect_size = (text_size[0]+20, text_size[1]+20)
+    rect = Image.new('RGBA', rect_size, "black")
+    rect_draw = ImageDraw.Draw(rect)
+    button_draw.text((10, 10), output_string, font=font)
+    image_pillow.paste(rect_image, location)
    
     # Draw the text  
-    draw.text(location, output_string, font=font) 
+    #draw.text(location, output_string, font=font) 
 
     return cv2.cvtColor(np.array(image_pillow), cv2.COLOR_RGB2BGR)
 
