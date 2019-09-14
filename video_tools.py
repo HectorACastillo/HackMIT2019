@@ -26,8 +26,8 @@ def draw_tracking_box(box, image):
 
 def draw_translation(output_string, location, image):
 
-    image_rgb = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
-    image_pillow = Image.fromarray(image_rbg)
+    image_rgb = cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
+    image_pillow = Image.fromarray(image_rgb)
 
     draw = ImageDraw.Draw(image_pillow)  
     # use a truetype font  
