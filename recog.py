@@ -25,7 +25,7 @@ def recog():
     )
     # visual_recognition.disable_SSL_verification()
 
-    with open('./frame.png', 'rb') as image_file:
+    with open('./frame.jpg', 'rb') as image_file:
         classes = visual_recognition.classify(
             image_file,
             threshold='0.6',
