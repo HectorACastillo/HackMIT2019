@@ -1,6 +1,12 @@
 import cv2
 import numpy as np
 
+from recog import recog
+from video_tools import draw_tracking_box, draw_translation
+from parse_label import parse_label
+from change_lang import change_lang
+
+frame_name = "frame.jpg" # name of the file for the frame to be saved
 
 def draw_tracking_box(box, image):
     """
@@ -29,3 +35,17 @@ def draw_translation(output_string, location, image):
     # opencv draw reactangle
     # opencv write text
     # return the image
+
+def translate(current_box, frame, language="es"):
+    """
+    performs the translation operation including 
+        - saving and recognizing a give portion of the image (current_box or frame)
+        - deciding which recognition is the best
+        - returns the recognition and the translation
+    """
+    x,y,w,h = [int(p) for p in box] # convert the coordinates to integers
+    cv2.imwrite(frame_name, frame[y:y+h,x:x+w]) # save image of just the 
+    recognition_output = recog(frame_name) # run the image recognition
+    to_translate = parse_label(recognition_output) # get the name of the object in english
+    translated = change_lang(to_translate, language) # translate the object into specified language
+    return to_translate, translated

@@ -44,46 +44,41 @@ OPENCV_OBJECT_TRACKERS = {
 # logitech: index 2
 cap = cv2.VideoCapture(0) # input the indeex of the video you want
 tracker = cv2.TrackerKCF_create() # for tracking the object in the frame
-current_box = None # location of the object
-translated = None # last translation of object
 
-while(True):
+# location of the object 
+# this cariable not being None signifies that you are tracking an object
+current_box = None 
+
+# lsat translation of object
+# this variable not being None indicates that a translation has been made
+translated = None 
+
+key = None # user input
+
+
+# press 'q' to quit the operation
+while(key & 0xFF != ord('q')):
     # Capture frame-by-frame
     ret, frame = cap.read()
 
     #print(frame.shape)
 
-    # if already tracking
+    # if already tracking, update the location of the object
     if current_box:
-        # find the locaiton of the object
+        # find the location of the object
         (success, current_box) = tracker.update(frame)
 
         # if found, draw a box around it
         if success: draw_tracking_box(current_box, frame)
 
 
-
-    # receive use input
+    # receive user input
     key = cv2.waitKey(1)
 
-    #print(key)
-    
-    if key == ord("w"):
-        """
-        Upon pressing w, it will call the function to trasnlate and display the output
-        """
 
-        print("translation")
-        if not current_box:
-            print("stop")
-
-        x,y,w,h = [int(p) for p in current_box] # convert the coordinates to integers
-        cv2.imwrite('frame.jpg', frame[y:y+h,x:x+w]) # save image of just the 
-        recognition_output = recog('frame.jpg') # run the image recognition
-        to_translate = parse_label(recognition_output) # get the name of the object in english
-        translated = change_lang(to_translate, "es") # translate the object into specified language
-        print(to_translate, translated) # print in the terminal
-
+    if key == ord("t"):
+        # Upon pressing 't', it will call the function to trasnlate and display the output
+        to_translate, translated = translate(current_box, frame, "es")
 
 
     # if the 's' key is selected, we are going to "select" a bounding
@@ -101,9 +96,6 @@ while(True):
     if translated: frame = draw_translation(translated, (x,y), frame)
     cv2.imshow('frame', frame)
 
-    # stop outputting if the user types 'q'
-    if key & 0xFF == ord('q'):
-        break
 
 # When everything done, release the capture
 cap.release()
