@@ -10,7 +10,7 @@ from __future__ import print_function
 from ibm_watson import VisualRecognitionV3
 import json
 
-def recog():
+def recog(file_name):
 
     """
     Reads local image frame.png and classifies it
@@ -25,7 +25,7 @@ def recog():
     )
     # visual_recognition.disable_SSL_verification()
 
-    with open('./frame.jpg', 'rb') as image_file:
+    with open('./' + file_name, 'rb') as image_file:
         classes = visual_recognition.classify(
             image_file,
             threshold='0.6',
