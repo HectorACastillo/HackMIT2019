@@ -14,7 +14,15 @@ def draw_tracking_box(box, image):
 
 
 def draw_translation(output_string, location, image):
-    pass
+    
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    img = cv2.imread(image,cv2.IMREAD_COLOR)
+
+    cv2.putText(img, output_string, location, font, 0.8, (255, 0, 0), 2, cv2.LINE_AA)
+
+    return img
+
+
     # image will be a numpy array
     # location will be a tple
     # output ewill be string
