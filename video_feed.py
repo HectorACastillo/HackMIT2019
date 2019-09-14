@@ -37,7 +37,7 @@ OPENCV_OBJECT_TRACKERS = {
 # comp camera: index 0
 # logitech: index 2
 cap = cv2.VideoCapture(2) # input the indeex of the video you want
-#tracker = cv2.TrackerMIL_create()
+tracker = cv2.TrackerMIL_create()
 tracking = False
 
 while(True):
@@ -63,18 +63,21 @@ while(True):
 
     # if the 's' key is selected, we are going to "select" a bounding
 	# box to track
-    if key == ord("s"):
-    	# select the bounding box of the object we want to track (make
-		# sure you press ENTER or SPACE after selecting the ROI)
-        initBB = cv2.selectROI("Frame", frame, fromCenter=False, showCrosshair=True)
-        print(type(initBB))
-        tracker.init(frame, initBB)
-        tracking = True
+    # if key == ord("s"):
+    # 	# select the bounding box of the object we want to track (make
+	# 	# sure you press ENTER or SPACE after selecting the ROI)
+    #     initBB = cv2.selectROI("Frame", frame, fromCenter=False, showCrosshair=True)
+    #     print(type(initBB))
+    #     tracker.init(frame, initBB)
+    #     tracking = True
 
     time.sleep()
 
     if key == ord('w'):
-        cv2.imwrite('bottle.png', frame)
+        cv2.imwrite('frame.png', frame)
+        # input = classifier.classify("frame.png")
+        # input_dict = to_dict(input)
+        # output = translate(input_dict)
 
     # stop outputting if the user types 'q'
     if key & 0xFF == ord('q'):
