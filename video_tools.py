@@ -1,7 +1,13 @@
+#coding=utf-8
+
+#need to import open cv and pip install pillow
+
+from __future__ import unicode_literals
 import cv2
 import numpy as np
 
 from recog import recog
+from PIL import ImageFont, ImageDraw, Image  
 from parse_label import parse_label
 from change_lang import change_lang
 
@@ -22,6 +28,16 @@ def draw_translation(output_string, location, image):
     
     font = cv2.FONT_HERSHEY_SIMPLEX
 
+    image_rgb = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
+    image_pillow = Image.fromarray(image_rbg)
+
+    draw = ImageDraw.Draw(image_pillow)  
+    # use a truetype font  
+    font = ImageFont.truetype("Arial Black.ttf", 40)  
+   
+    # Draw the text  
+    draw.text(location, output_string, font=font) 
+
     cv2.putText(image, output_string, location, font, 0.8, (255, 0, 0), 2, cv2.LINE_AA)
 
     return image
@@ -35,7 +51,7 @@ def draw_translation(output_string, location, image):
     # opencv write text
     # return the image
 
-def translate(current_box, frame, language="es"):
+def translate(box, frame, language="es"):
     """
     performs the translation operation including 
         - saving and recognizing a give portion of the image (current_box or frame)
