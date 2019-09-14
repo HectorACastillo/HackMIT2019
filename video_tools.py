@@ -25,8 +25,6 @@ def draw_tracking_box(box, image):
 
 
 def draw_translation(output_string, location, image):
-    
-    font = cv2.FONT_HERSHEY_SIMPLEX
 
     image_rgb = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     image_pillow = Image.fromarray(image_rbg)
@@ -38,9 +36,7 @@ def draw_translation(output_string, location, image):
     # Draw the text  
     draw.text(location, output_string, font=font) 
 
-    cv2.putText(image, output_string, location, font, 0.8, (255, 0, 0), 2, cv2.LINE_AA)
-
-    return image
+    return cv2.cvtColor(np.array(image_pillow), cv2.COLOR_RGB2BGR)
 
 
     # image will be a numpy array
