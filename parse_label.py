@@ -18,6 +18,7 @@ def parse_label(text):
     i = scores.index(max(scores))
     return reference(labels[i],'class')
     
+
 def reference(dic, key):
     '''
     INPUT:  dic - string containing a "dictionary" with keys: label, score, and type hierarchy

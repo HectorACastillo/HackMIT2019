@@ -3,7 +3,7 @@
 # Author: Tony Terrasa
 # Dependencies:
 # -- python version: 2.7
-# --
+# -- opencv-contrib 3.4.4.19 #IMPORTANT THAT YOU INSTALL THE CONTRIB VERSION OF OPENCV
 # image input
 # source: https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_gui/py_video_display/py_video_display.html
 # image tracking
@@ -16,19 +16,24 @@
 
 from __future__ import print_function
 import numpy as np
-from recog import recog
 import cv2
 import time
 
+from recog import recog
+from video_tools import draw_tracking_box
+from parse_label import parse_label
+from change_lang import change_lang
+
 """
+types of trackers
 OPENCV_OBJECT_TRACKERS = {
-	"csrt": cv2.TrackerCSRT_create,
-	"kcf": cv2.TrackerKCF_create,
-	"boosting": cv2.TrackerBoosting_create,
-	"mil": cv2.TrackerMIL_create,
-	"tld": cv2.TrackerTLD_create,
-	"medianflow": cv2.TrackerMedianFlow_create,
-	"mosse": cv2.TrackerMOSSE_create
+    "csrt": cv2.TrackerCSRT_create,
+    "kcf": cv2.TrackerKCF_create,
+    "boosting": cv2.TrackerBoosting_create,
+    "mil": cv2.TrackerMIL_create,
+    "tld": cv2.TrackerTLD_create,
+    "medianflow": cv2.TrackerMedianFlow_create,
+    "mosse": cv2.TrackerMOSSE_create
 }
 """
 
@@ -37,49 +42,60 @@ OPENCV_OBJECT_TRACKERS = {
 # on TonyT computer:
 # comp camera: index 0
 # logitech: index 2
-cap = cv2.VideoCapture(2) # input the indeex of the video you want
-#tracker = cv2.TrackerMIL_create()
-tracking = False
+cap = cv2.VideoCapture(0) # input the indeex of the video you want
+tracker = cv2.TrackerKCF_create()
+current_box = None
 
 while(True):
     # Capture frame-by-frame
     ret, frame = cap.read()
 
-    # Our operations on the frame come here
-    # gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
     #print(frame.shape)
 
-    # if tracking:
-    #     (success, box) = tracker.update(frame)
-    #
-	# 	# check to see if the tracking was a success
-    #     if success:
-    #         (x, y, w, h) = [int(v) for v in box]
-    #         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    # if already tracking
+    if current_box:
+        # find the locaiton of the object
+        (success, current_box) = tracker.update(frame)
+
+        # if found, draw a box around it
+        if success: draw_tracking_box(current_box, frame)
 
     cv2.imshow('frame', frame)
 
+    # receive use input
     key = cv2.waitKey(1)
 
+    #print(key)
+    
+    if key == ord("w"):
+        """
+        Upon pressing w, it will call the function to trasnlate and display the output
+        """
+
+        print("writing")
+        if not current_box:
+            print("stop")
+
+        x,y,w,h = [int(p) for p in current_box] # convert the coordinates to integers
+        cv2.imwrite('frame.jpg', frame[y:y+h,x:x+w]) # save image of just the 
+        recognition_output = recog() # run the image recognition
+        to_translate = parse_label(recognition_output) # 
+        translated = change_lang(to_translate[1:], "es")
+        print(to_translate, translated)
+
+
     # if the 's' key is selected, we are going to "select" a bounding
-	# box to track
-    # if key == ord("s"):
-    # 	# select the bounding box of the object we want to track (make
-	# 	# sure you press ENTER or SPACE after selecting the ROI)
-    #     initBB = cv2.selectROI("Frame", frame, fromCenter=False, showCrosshair=True)
-    #     print(type(initBB))
-    #     tracker.init(frame, initBB)
-    #     tracking = True
+    # box to track
+    if key == ord("s"):
+        # select the bounding box of the object we want to track (make
+        # sure you press ENTER or SPACE after selecting the ROI)
+        initBB = cv2.selectROI("Frame", frame, fromCenter=False, showCrosshair=True)
+        tracker.init(frame, initBB)
 
-    # time.sleep()
+        # keep track of the region of interest
+        current_box = initBB
 
-    if key == ord('w'):
-        cv2.imwrite('frame.png', frame)
-        input = recog()
-        print(input)
-        # input_dict = to_dict(input)
-        # output = translate(input_dict)
+
 
     # stop outputting if the user types 'q'
     if key & 0xFF == ord('q'):
