@@ -5,7 +5,7 @@ def parse_label(text):
     '''
 
     # format the string for parsing
-    text = text.replace(" ","").split('"classes":[')[1]
+    text = text.split('"classes": [')[1]
     text = text[:text.find("]")].replace("\n","")
     labels = text.split("},{")
 
