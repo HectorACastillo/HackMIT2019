@@ -37,7 +37,7 @@ def draw_translation(output_string, location, image):
     rect_size = (text_size[0]+20, text_size[1]+20)
     rect = Image.new('RGBA', rect_size, "black")
     rect_draw = ImageDraw.Draw(rect)
-    button_draw.text((10, 10), output_string, font=font)
+    rect_draw.text((10, 10), output_string, font=font)
     image_pillow.paste(rect_image, location)
    
     # Draw the text  
