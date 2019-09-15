@@ -5,7 +5,7 @@
 Learning new language vocabulary through an interactive AR experience.
 
 ## See It In Action
-![Demo Video](https://www.dropbox.com/s/ajmc7e22sp5qbz1/VocabViz.mp4?dl=0)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/15p8nqRELFA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Team
 
