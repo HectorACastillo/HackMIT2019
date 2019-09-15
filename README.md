@@ -1,15 +1,19 @@
-# AR Translator
+# Vocab Viz
 
-Learning new language vocabulary through an interactive AR labeling experience.
+Learning new language vocabulary through an interactive AR experience.
 
 
-## Collaborators
+## Team
 
-* **Hector Castillo** - *Project Manager*
-* **Evan Hostetler** - *Hardware Specialist*
-* **Anthony Nardomarino** - *Object Detection Specialist* 
-* **Tony Terrasa** - *AR Specialist* 
-* **Grady Thomas** - *Translation API Specialist* 
+* **Hector Castillo** - *MIT '20* | Integration, Infrastructure
+* **Evan Hostetler** - *MIT '22* | Hardware Specialist, Branding
+* **Anthony Nardomarino** - *MIT '22* | Object Classification Specialist
+* **Tony Terrasa** - *MIT '21* | AR Specialist, Integration
+* **Grady Thomas** - *MIT '23* | Translation API Specialist
+
+## About US
+
+The Vocab Viz team is comprised of five undergraduate students studying mechanical and aerospace engineering at MIT. At Vocab Viz we are driven not only to help the world learn new languages, but to bring the world a little closer together. 
 
 ## Built With
 
@@ -18,11 +22,7 @@ Learning new language vocabulary through an interactive AR labeling experience.
 * [OpenCV - Object Tracking and I/O](https://https://opencv.org/)
 
 
-## Acknowledgments
-
-* HackMIT
-* IBM
-
+## Notes to Hackers
 
 In order to run the google translate, you need the private key
 then set the following environment variable;
