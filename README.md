@@ -22,13 +22,32 @@ The Vocab Viz team is comprised of five undergraduate students studying mechanic
 * [OpenCV - Object Tracking and I/O](https://https://opencv.org/)
 
 
-## Notes to Hackers
+## Dependencies
+The following will be necessary to run VocabViz
 
-In order to run the google translate, you need the private key
-then set the following environment variable;
-echo $GOOGLE_APPLICATION_CREDENTIALS
-/home/tony/Projects/AR Translation-elecd951bf41.json
+- Python2.7
+- Pillow==6.1.0
+- OpenCV-Contrib==3.4.4
+- Numpy==1.16.5
+- ibm-watson==3.4.0
+- google-cloud-translate==1.6.0
+
+```
+  pip install opencv-contrib-python==3.4.4.19  
+  pip install pillow
+  pip install numpy
+  pip install ibm_watson
+  pip install --upgrade google-cloud-translate
+```
+
+In order to run the google translate, you need the private key to access Google Cloud Services. Download your key and make sure the following environment variable is set:
+```
+  export GOOGLE_APPLICATION_CREDENTIALS="/path/to/key"
+```
 
 
-pip install --upgrade google-cloud-trnsnlate
+
+
+
+
 

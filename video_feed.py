@@ -20,7 +20,7 @@ import cv2
 import time
 
 from recog import recog
-from video_tools import draw_tracking_box, draw_translation
+from video_tools import draw_tracking_box, draw_translation, translate
 from parse_label import parse_label
 from change_lang import change_lang
 
@@ -38,12 +38,15 @@ OPENCV_OBJECT_TRACKERS = {
 """
 
 
+def make_tracker(): 
+    return cv2.TrackerKCF_create()
+
 
 # on TonyT computer:
 # comp camera: index 0
 # logitech: index 2
 cap = cv2.VideoCapture(0) # input the indeex of the video you want
-tracker = cv2.TrackerKCF_create() # for tracking the object in the frame
+tracker = make_tracker() # for tracking the object in the frame
 
 # location of the object 
 # this cariable not being None signifies that you are tracking an object
@@ -53,8 +56,10 @@ current_box = None
 # this variable not being None indicates that a translation has been made
 translated = None 
 
-key = None # user input
+key = True  # user input must be True to enter while loop
 
+output_name = "output"
+language = "es"
 
 # press 'q' to quit the operation
 while(key and key & 0xFF != ord('q')):
@@ -71,9 +76,6 @@ while(key and key & 0xFF != ord('q')):
         # if found, draw a box around it
         if success: draw_tracking_box(current_box, frame)
 
-        
-
-
     # receive user input
     key = cv2.waitKey(1)
 
@@ -81,7 +83,7 @@ while(key and key & 0xFF != ord('q')):
     # must be tracking an object
     if current_box and key == ord("t"):
         # Upon pressing 't', it will call the function to trasnlate and display the output
-        to_translate, translated = translate(current_box, frame, "es")
+        to_translate, translated = translate(current_box, frame, language)
 
 
     # if the 's' key is selected, we are going to "select" a bounding
@@ -89,19 +91,27 @@ while(key and key & 0xFF != ord('q')):
     if key == ord("s"):
         # select the bounding box of the object we want to track 
         # (make sure you press ENTER or SPACE after selecting the ROI)
-        initBB = cv2.selectROI("Frame", frame, fromCenter=False, showCrosshair=True)
+        initBB = cv2.selectROI(output_name, frame, fromCenter=False)
         tracker.init(frame, initBB)
 
         # keep track of the region of interest
         current_box = initBB
 
+    if key == ord("r"):
+        current_box = None
+        translated = None
+        initBB = None
+        tracker = make_tracker() # for tracking the object in the frame
+
+
 
     # if a translation has been made, draw it on the box 
     if translated: 
         location = (int(current_box[0]), int(current_box[1]))
-        frame = draw_translation(translated, location , frame)
+        # print(translated)
+        frame = draw_translation((to_translate, language, translated), location, frame)
 
-    cv2.imshow('frame', frame)
+    cv2.imshow(output_name, frame)
 
 
 # When everything done, release the capture

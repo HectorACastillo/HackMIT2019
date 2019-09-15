@@ -24,17 +24,31 @@ def draw_tracking_box(box, image):
     cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
 
-def draw_translation(output_string, location, image):
+def draw_translation(output_strings, location, image):
 
-    image_rgb = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
-    image_pillow = Image.fromarray(image_rbg)
+    #output_strings is list of english word, language, translated
+    if len(output_strings[0]) > len(output_strings[2]):
+        longer_word = output_strings[0]
+    else:
+        longer_word = output_strings[2]
+
+    image_rgb = cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
+    image_pillow = Image.fromarray(image_rgb)
 
     draw = ImageDraw.Draw(image_pillow)  
     # use a truetype font  
-    font = ImageFont.truetype("Arial Black.ttf", 40)  
+    font = ImageFont.truetype("Arial Black.ttf", 15)  
+
+    text_size = font.getsize(longer_word)
+    rect_size = (text_size[0]+20, (text_size[1]+20)*2)
+    rect = Image.new('RGBA', rect_size, "black")
+    rect_draw = ImageDraw.Draw(rect)
+    rect_draw.text((10, 10), output_strings[2], font=font, fill="#FFFFFF")
+    rect_draw.text((10, text_size[1]+20), output_strings[0], font=font, fill="#808080")
+    image_pillow.paste(rect, (location[0], location[1]-(text_size[1]+20)))
    
     # Draw the text  
-    draw.text(location, output_string, font=font) 
+    #draw.text(location, output_string, font=font) 
 
     return cv2.cvtColor(np.array(image_pillow), cv2.COLOR_RGB2BGR)
 
