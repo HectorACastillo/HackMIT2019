@@ -58,6 +58,7 @@ translated = None
 key = True  # user input must be True to enter while loop
 
 output_name = "output"
+language = "es"
 
 # press 'q' to quit the operation
 while(key and key & 0xFF != ord('q')):
@@ -81,7 +82,7 @@ while(key and key & 0xFF != ord('q')):
     # must be tracking an object
     if current_box and key == ord("t"):
         # Upon pressing 't', it will call the function to trasnlate and display the output
-        to_translate, translated = translate(current_box, frame, "es")
+        to_translate, translated = translate(current_box, frame, language)
 
 
     # if the 's' key is selected, we are going to "select" a bounding
@@ -107,7 +108,7 @@ while(key and key & 0xFF != ord('q')):
     if translated: 
         location = (int(current_box[0]), int(current_box[1]))
         # print(translated)
-        frame = draw_translation(translated, location, frame)
+        frame = draw_translation((to_translate, language, translated), location, frame)
 
     cv2.imshow(output_name, frame)
 
