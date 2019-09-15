@@ -29,7 +29,7 @@ The following will be necessary to run VocabViz
 - google-cloud-translate==1.6.0
 
 `
-pip install opencv-contrib-python==3.4.4.19 \n
+pip install opencv-contrib-python==3.4.4.19  <br />
 pip install pillow
 pip install numpy
 pip install ibm_watson
