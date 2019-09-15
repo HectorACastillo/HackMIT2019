@@ -33,7 +33,7 @@ The following will be necessary to run VocabViz
   pip install pillow
   pip install numpy
   pip install ibm_watson
-  pip install google-cloud-translate
+  pip install --upgrade google-cloud-translate
 ```
 
 You will also need to have access to Google Cloud Services and have an authenticated key
@@ -50,5 +50,5 @@ echo $GOOGLE_APPLICATION_CREDENTIALS
 /home/tony/Projects/AR Translation-elecd951bf41.json
 
 
-pip install --upgrade google-cloud-trnsnlate
+
 
