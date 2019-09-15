@@ -36,18 +36,17 @@ The following will be necessary to run VocabViz
   pip install --upgrade google-cloud-translate
 ```
 
-You will also need to have access to Google Cloud Services and have an authenticated key
-
+In order to run the google translate, you need the private key to access Google Cloud Services. Download your key and make sure the following environment variable is set:
+```
+  export GOOGLE_APPLICATION_CREDENTIALS="/path/to/key"
+```
 ## Acknowledgments
 
 * HackMIT
 * IBM
 
 
-In order to run the google translate, you need the private key
-then set the following environment variable;
-echo $GOOGLE_APPLICATION_CREDENTIALS
-/home/tony/Projects/AR Translation-elecd951bf41.json
+
 
 
 
