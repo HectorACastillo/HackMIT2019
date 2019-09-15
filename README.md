@@ -28,13 +28,13 @@ The following will be necessary to run VocabViz
 - ibm-watson==3.4.0
 - google-cloud-translate==1.6.0
 
-  `
+```
   pip install opencv-contrib-python==3.4.4.19  
   pip install pillow
   pip install numpy
   pip install ibm_watson
   pip install google-cloud-translate
-  `
+```
 
 You will also need to have access to Google Cloud Services and have an authenticated key
 
