@@ -41,6 +41,20 @@ OPENCV_OBJECT_TRACKERS = {
 def make_tracker(): 
     return cv2.TrackerKCF_create()
 
+def introduction():
+    with open("welcome_prompt.txt", "rb") as f:
+        welcome = f.read()
+        print(welcome)
+
+def change_language():
+    inp = raw_input("Enter a language code to translate to that language and hit enter. For a full list of languages, type 'help' \nnew language: ")
+    if inp == "help":
+        
+        with open("change_language.txt", "rb") as f:
+            welcome = f.read()
+            print(welcome)
+        inp  = raw_input("new language: ")
+    return inp
 
 # on TonyT computer:
 # comp camera: index 0
@@ -59,7 +73,11 @@ translated = None
 key = True  # user input must be True to enter while loop
 
 output_name = "output"
+cv2.namedWindow(output_name,cv2.WINDOW_NORMAL) 
 language = "es"
+
+
+introduction()
 
 # press 'q' to quit the operation
 while(key and key & 0xFF != ord('q')):
@@ -104,6 +122,8 @@ while(key and key & 0xFF != ord('q')):
         tracker = make_tracker() # for tracking the object in the frame
 
 
+    if key == ord("l"):
+        language = change_language()
 
     # if a translation has been made, draw it on the box 
     if translated: 

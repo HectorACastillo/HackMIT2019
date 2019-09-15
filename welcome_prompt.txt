@@ -1,0 +1,9 @@
+################################
+# WELCOME TO VOCAB VIZ
+################################
+
+Press 's' to select a region to identify. 
+Press 't' to translate your selection/
+Press 'r' to deselect.
+Press 'l' to change language.
+
