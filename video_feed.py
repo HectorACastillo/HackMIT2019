@@ -38,7 +38,8 @@ OPENCV_OBJECT_TRACKERS = {
 """
 
 
-def make_tracker(): return cv2.TrackerKCF_create()
+def make_tracker(): 
+    return cv2.TrackerKCF_create()
 
 
 # on TonyT computer:
