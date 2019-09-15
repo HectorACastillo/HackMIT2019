@@ -1,4 +1,5 @@
-![logo](VocabViz.png "Vocab Viz")
+<img src="VocabViz.png" alt="Logo"
+	title="Vocab Viz" height="200" />
 # Vocab Viz
 
 Learning new language vocabulary through an interactive AR experience.
