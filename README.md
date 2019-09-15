@@ -1,4 +1,4 @@
-![logo][VocabViz.png]
+![logo](VocabViz.png "Vocab Viz")
 # Vocab Viz
 
 Learning new language vocabulary through an interactive AR experience.
