@@ -40,12 +40,12 @@ def draw_translation(output_strings, location, image):
     font = ImageFont.truetype("Arial Black.ttf", 15)  
 
     text_size = font.getsize(longer_word)
-    rect_size = (text_size[0]+20, (text_size[1]+20)*2)
+    rect_size = (text_size[0]+8, (text_size[1]+4)*2)
     rect = Image.new('RGBA', rect_size, "black")
     rect_draw = ImageDraw.Draw(rect)
-    rect_draw.text((10, 10), output_strings[2], font=font, fill="#FFFFFF")
-    rect_draw.text((10, text_size[1]+20), output_strings[0], font=font, fill="#808080")
-    image_pillow.paste(rect, (location[0], location[1]-(text_size[1]+20)))
+    rect_draw.text((5, 0), output_strings[2], font=font, fill="#FFFFFF")
+    rect_draw.text((5, text_size[1]), output_strings[0], font=font, fill="#808080")
+    image_pillow.paste(rect, (location[0], location[1]-(text_size[1]*2+10)))
    
     # Draw the text  
     #draw.text(location, output_string, font=font) 
