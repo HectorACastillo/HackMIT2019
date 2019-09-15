@@ -38,7 +38,7 @@ def draw_translation(output_string, location, image):
     rect = Image.new('RGBA', rect_size, "black")
     rect_draw = ImageDraw.Draw(rect)
     rect_draw.text((10, 10), output_string, font=font)
-    image_pillow.paste(rect_image, location)
+    image_pillow.paste(rect, location)
    
     # Draw the text  
     #draw.text(location, output_string, font=font) 
